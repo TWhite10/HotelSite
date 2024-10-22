@@ -1,8 +1,4 @@
 
-const login = document.querySelector(`#loginbtn`)
-const dateForm = document.getElementById('dateForm');
-const carouselSlides = document.querySelector('#carousel-slides');
-
 
 
 function togglePopup() {
@@ -13,45 +9,80 @@ const loginForm = document.querySelector(`.login-form-container`)
 const loginName = document.querySelector(`.loginUsername`)
 const loginEmail = document.querySelector(`.loginEmail`)
 
-loginForm.addEventListener(`submit`,e => {
-    e.preventDefault();
-    validateInputs();
-});
+
 
 const setError = (element, message)=>{
   
     const inputControl = element.parentElement;
-    const errorDisplay = inputControl.querySelector('.error');
+    const errorDisplay = inputControl.querySelector('.error-message');
+    if (!errorDisplay){
+        const errorDiv = document.createElement(`div`)
+        errorDiv.className = `error-message`;
+        inputControl.appendChild(errorDiv)
+    }
     errorDisplay.innerHTML = message;
     inputControl.classList.add(`error`);
     inputControl.classList.remove('success');
 
-}
+};
 const setSuccess = element => {
     const inputControl = element.parentElement;
-    const errorDisplay = inputControl.querySelector('.error');
-
-    errorDisplay.innerText = '';
+    const errorDisplay = inputControl.querySelector('.error-message');
+    if (errorDisplay){
+       errorDisplay.innerText = '';
+    }
+    
     inputControl.classList.add('success');
     inputControl.classList.remove('error');
 };
 const validateInputs = ()=>{
     const usernameValue = loginName.value.trim();
     const emailValue = loginEmail.value.trim();
+    let isValid = true;
 
     if (usernameValue === ''){
-        setError(username,`Usernamem is required`);
+        setError(loginName,`The username cannot be blank.`);
+        usernameValue.focus();
+        isValid=false;
     }else if (usernameValue.length < 4) {
-        showError(`Username must be at least 4 characters`);
+        setError(loginName,`Username must be at least 4 characters`);
+        usernameValue.focus();
+        isValid=false;
+    }else if (new Set(usernameValue).size < 2){
+        setError(loginName,`The username must contain at least two unique characters.`);
+        usernameValue.focus();
+        isValid=false;
+    }else if (!/^\w+$/.test(usernameValue)) {
+            setError(loginName,`The username cannot contain any special characters or whitespace.`);
+            usernameValue.focus();
+            isValid=false;
     }else {
-        setSuccess(username);
+        setSuccess(loginName);
     }
+
+
     if (emailValue === ''){
-        setError(username,`Usernamem is required`); 
+        setError(emailValue,`Email is required`); 
     }
+    return isValid
 
-}
+};
+loginForm.addEventListener(`submit`,e => {
+    e.preventDefault();
 
+    validateInputs();
+});
+loginName.addEventListener(`submit`,e => {
+    e.preventDefault();
+    if(loginName.value.trim() !== ''){
+       validateInputs(); 
+    }
+    
+    
+});
+const login = document.querySelector(`#loginbtn`)
+const dateForm = document.getElementById('dateForm');
+const carouselSlides = document.querySelector('#carousel-slides');
 
 function calculateDays(){
     const d1= document.getElementById(`date1`).value;

@@ -5,7 +5,7 @@
     top: 0;
     right: 0;
     width: 50%;
-    height: 50%;
+    height: 60%;
     background: rgba(0, 0, 0, 0.8);
     justify-content: center;
     align-items: center;
@@ -45,6 +45,14 @@
     border-radius: 8px;
 
 }
+
+.error-message{
+    color: red;
+}
+.success-message{
+    color:greenyellow;
+}
+
 #date-form{
     background-color: #C4B7A6;
 }
@@ -56,6 +64,7 @@
     border-radius: 8px;
     color: white;
     background-color: green;
+    
     padding: 10px 23px;
     border: none;
     margin-bottom: 15px;
