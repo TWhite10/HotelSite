@@ -32,17 +32,26 @@
     
 }
 .form-label{
+    display: block;
     text-align: left;
     color:white;
    
 
 }
+
 .form-input{
     padding: 10px;
     margin-bottom: 15px;
     border-radius: 8px;
 
 }
+#date-form{
+    background-color: #C4B7A6;
+}
+.form{
+    background-color: #C4B7A6;
+}
+
 .btn-submit{
     border-radius: 8px;
     color: white;
@@ -68,6 +77,38 @@
     display: flex;
     opacity:1 ;
 }
+
+#rsvbtn{
+    background-color:#739E3F ;
+    color: whitesmoke;
+    
+}
+#loginbtn{
+    background-color: #0072B5;
+    color: whitesmoke;
+}
+/* div.container-fluid{
+    background-color: #C4B7A6;
+} */
+.parent div.container-fluid {
+    background-color: #C4B7A6;
+   
+}
 .firstImg{
     width: 100%;
+}
+
+.firstImg{
+    object-fit: cover;
+    width: 100%;
+    height: 500px;
+} 
+.carousel-item{
+    object-fit: cover;
+    width: 100%;
+    height: 700px;
+   
+}
+footer {
+    background-color:#C4B7A6;
 }
