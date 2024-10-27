@@ -86,6 +86,15 @@
     border: none;
     
 }
+.signup{
+    border-radius: 8px;
+    padding: 10px 23px;
+    color: white;
+    background-color:#0072B5 ;
+    border: none;
+    
+}
+
 .btn-close-popup:active {
     background-color: maroon;
     box-shadow: 0 5px #666;

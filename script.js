@@ -1,3 +1,6 @@
+const login = document.querySelector(`#loginbtn`)
+const dateForm = document.getElementById('dateForm');
+const carouselSlides = document.querySelector('#carousel-slides');
 
 
 
@@ -12,7 +15,7 @@ const loginPassword = document.querySelector(`.loginPassword`)
 
 
 const setError = (element, message)=>{
-  
+
     const inputControl = element.parentElement;
     const errorDisplay = inputControl.querySelector('.error-message');
     if (!errorDisplay){
@@ -31,7 +34,7 @@ const setSuccess = element => {
     if (errorDisplay){
        errorDisplay.innerText = '';
     }
-    
+
     inputControl.classList.add('success');
     inputControl.classList.remove('error');
 };
@@ -65,7 +68,7 @@ const validateInputs = ()=>{
     if (emailValue === ''){
         setError(loginEmail,`Email is required`); 
     }else setSuccess(loginEmail)
-    
+
 
     if ( passwordValue === ''){
         setError(loginPassword,`The password cannot be blank.`);
@@ -92,7 +95,7 @@ const validateInputs = ()=>{
         setSuccess(loginPassword);
     }
     return isValid
-   
+
 
 };
 loginForm.addEventListener(`submit`,e => {
@@ -110,33 +113,66 @@ loginPassword.addEventListener(`blur`,e => {
     if(loginPassword.value.trim() !== ''){
        validateInputs(); 
     }
-    
-    
+
+
 });
 
-const login = document.querySelector(`#loginbtn`)
-const dateForm = document.getElementById('dateForm');
-const carouselSlides = document.querySelector('#carousel-slides');
+//calculator dates info
+const startDateInput = document.getElementById(`date1`);
+const endDateInput = document.getElementById(`date2`);
+const numberOfNights = document.getElementById(`output`);
 
-const toDateInputValue = new Date >= Date
+//setting today as minimum day
+const today = new Date();
+const todayFormat = today.toISOString().split(`T`)[0];
 
-function calculateDays(){
-    const d1= document.getElementById(`date1`).value;
-    const d2= document.getElementById(`date2`).value;
-    const dateOne = (new Date(d1));
-    const dateTwo = new Date(d2);
-    const time = Math.abs(dateTwo - dateOne);
-    const days = Math.ceil(time/ (1000 * 60 * 60 * 24));
-    document.getElementById(`output`).innerHTML=days;
-    
-    
+
+//setting min dates for startdate and end date
+startDateInput.min = todayFormat;
+endDateInput.min = todayFormat;
+
+
+//calculating number of nights 
+function calculateNights() {
+
+    const startDate = startDateInput.value;
+    const endDate = endDateInput.value;
+
+
+    if (startDate && endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const timeDifference = end - start;
+        const nights = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+        //display the number of nights 
+        if (nights > 0) {
+            numberOfNights.textContent = `${nights} Night(s)`
+            numberOfNights.style.color = `green`;
+        } else {
+            numberOfNights.textContent = `Invalid dates`
+            numberOfNights.style.color = `red`;
+        }
+    }
 }
 
-const dateInputs = document.querySelectorAll("input[type='date']");
-dateInputs.forEach(input=>{
-    input.addEventListener('change',calculateDays);
+
+startDateInput.addEventListener(`change`, calculateNights);
+endDateInput.addEventListener(`change`, calculateNights);
+
+//this makes sure that the date is not befor the state date using an alert 
+endDateInput.addEventListener('change', () => {
+    if (startDateInput.value && endDateInput.value < startDateInput.value) {
+        alert('End date cannot be before start date');
+        endDateInput.value = '';
+    }
+
+
 })
 
+
+
+//this is for the log in form 
 
 loginForm.onsubmit = function (e) {
     e.preventDefault();

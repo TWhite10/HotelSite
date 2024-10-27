@@ -58,6 +58,7 @@
                 <div>
                   <a href="#date-form"> <button class="btn btn-lg" id="rsvbtn" type="button"> Reserve </button> </a>
                   <button class="btn btn-lg" id="loginbtn" type="button" onclick="togglePopup()"> Login </button>
+                  <button class="btn btn-lg" id="signupbtn" type="button" onclick="togglePopup()"> SignUp </button> 
                 </div>
 
 
@@ -94,6 +95,7 @@
                     </form>
                     <button class="btn-close-popup" onclick="togglePopup()"> Close
                     </button>
+                    <a href="#signupbtn"> <button class="btn btn-md" id="inner-signup" type="button"> SignUp </button> </a>
                   </div>
                 </div>
 
@@ -135,8 +137,8 @@
                 </div>
                 <div class="col">
                   <span>Stay Dates</span>
-<!-- I have a very hard time trying to set the date to minimun todays date, still need to figure that out -->
-                  <input type="date" id="date1" min="2024-10-30" >
+
+                  <input type="date" id="date1" >
                   <span>-</span>
                   <input type="date" id="date2">
 
@@ -372,10 +374,11 @@
 
   </footer>
   </div>
-
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
+   
 </body>
 
 </html>
